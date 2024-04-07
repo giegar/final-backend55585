@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bambu Ecommerce API</title>
+</head>
+<body>
+    <header> Docs API Bambu Ecommerce</header>
+
+    <main>
+
+        <details>
+            <summary>Auth</summary>
+            <div>
+                <h3>api/auth/register (POST)</h3>
+                <p>Registrar nuevo usuario</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>name (string), requerido</li>
+                    <li>lastname (string)</li>
+                    <li>email (string), requerido</li>
+                    <li>password (string), requerido, minimo 8 caracteres</li>
+                </ul>
+            </div>
+            <div>
+                <h3>api/auth/login (POST)</h3>
+                <p>Iniciar sesion</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>email (string) requerido</li>
+                    <li>password (string) requerido, minimo 8 caracteres</li>
+                </ul>
+            </div>
+            <div>
+                <h3>api/auth/renew (POST)</h3>
+                <p>Renovar token de autorizacion</p>
+                <p>Sin parametros</p>
+            </div>
+            <div>
+                <h3>api/auth/recover-password (POST)</h3>
+                <p>Pedido de recuperación de contraseña via email</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>email (string) required</li>
+                </ul>
+            </div>
+            <div>
+                <h3>api/auth/resetPassword (GET)</h3>
+                <p>Validacion de token enviado por email</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>token (string)</li>
+                </ul>
+            </div>
+            <div>
+                <h3>api/auth/resetPassword (POST)</h3>
+                <p>Cambiar contraseña</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>token (string) required</li>
+                    <li>password (string) required</li>
+                </ul>
+            </div>
+
+        </details>
+        
+        <details>
+            <summary>Products</summary>
+            <div>
+                <h3>/api/products (POST)</h3>
+                <p>Agregar producto</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>title (string) requerido</li>
+                    <li>description (string) requerido</li>
+                    <li>code (number) requerido</li>
+                    <li>price (number) requerido</li>
+                    <li>stock (number) requerido</li>
+                    <li>category (string) requerido</li>
+                    <li>thumbanail (string)</li>
+                    <li>owner (_id) requerido: _ID de user valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/products (GET)</h3>
+                <p>Obtener todos los prodcutos de la base de datos con paginacion</p>
+                <p>Sin parametros</p>
+            </div>
+            <div>
+                <h3>/api/products/:PID (POST)</h3>
+                <p>Obtener un producto especifico por _ID</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/products/:PID (PUT)</h3>
+                <p>Modificar la informacion de un producto en la base de datos</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                    <li>title (string)</li>
+                    <li>description (string)</li>
+                    <li>code (number)</li>
+                    <li>price (number)</li>
+                    <li>stock (number)</li>
+                    <li>category (string)</li>
+                    <li>thumbanail (string)</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/products/:PID (DELETE)</h3>
+                <p>Eliminar un producto de la base de datos</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                </ul>
+            </div>
+        </details>
+        
+        <details>
+            <summary>Carts</summary>
+            <div>
+                <h3>/api/carts/:CID (POST)</h3>
+                <p>Obtener un carrito por _ID</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>pid (string) requerido: _ID de cart valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/carts/:CID/product/:PID (POST)</h3>
+                <p>Agregar un producto al carrito</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>cid (string) requerido: _ID de cart valido para MongoDB</li>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/carts/:CID/product/:PID (DELETE)</h3>
+                <p>Eliminar un producto del carrito</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>cid (string) requerido: _ID de cart valido para MongoDB</li>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/carts/:CID/product/:PID (PUT)</h3>
+                <p>Modificar la cantidad de un producto del carrito</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>cid (string) requerido: _ID de cart valido para MongoDB</li>
+                    <li>pid (string) requerido: _ID de product valido para MongoDB</li>
+                    <li>quantity (number) requerido: cantidad del producto</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/carts/:CID/product/:PID (DELETE)</h3>
+                <p>Realizar la compra del carrito</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>cid (string) requerido: _ID de cart valido para MongoDB</li>
+                </ul>
+            </div>
+            <div>
+                <h3>/api/carts/:CID (DELETE)</h3>
+                <p>Vaciar el carrito</p>
+                <p>Parametros:</p>
+                <ul>
+                    <li>cid (string) requerido: _ID de cart valido para MongoDB</li>
+                </ul>
+            </div>
+        </details>
+        
+
+    </main>
+</body>
+</html>
